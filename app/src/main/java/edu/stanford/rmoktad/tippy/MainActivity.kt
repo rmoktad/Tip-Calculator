@@ -1,6 +1,7 @@
 package edu.stanford.rmoktad.tippy
 
 import android.animation.ArgbEvaluator
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -40,6 +41,20 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 Log.i(TAG, "afterTextChanged $s")
                 computeTipAndTotal()
+                checkTotal()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+
+        etBudgetAmount.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                Log.i(TAG, "afterTextChanged $s")
+                checkTotal()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -50,14 +65,33 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun checkTotal() {
+        //if the total/budget is empty, we don't need to check if it's under budget!
+        if(tvTotalAmount.text.toString().isEmpty() || etBudgetAmount.text.toString().isEmpty()){
+            tvTotalAmount.setTextColor(Color.DKGRAY)
+            return;
+        }
+
+        val total = tvTotalAmount.text.toString().toDouble()
+        val budget = etBudgetAmount.text.toString().toDouble()
+
+        if(total <= budget){
+            tvTotalAmount.setTextColor(Color.DKGRAY)
+        }
+
+        else{
+            tvTotalAmount.setTextColor(Color.RED)
+        }
+    }
+
     private fun updateTipDescription(tipPercent: Int) {
         val tipDescription : String
         when(tipPercent){
-            in 0..9 -> tipDescription= "Poor"
-            in 10..14 -> tipDescription = "Acceptable"
-            in 15..19 -> tipDescription = "Good"
-            in 20..24 -> tipDescription = "Great"
-            else -> tipDescription = "Amazing"
+            in 0..9 -> tipDescription= "Poor \uD83D\uDE1E"
+            in 10..14 -> tipDescription = "Acceptable \uD83D\uDE10"
+            in 15..19 -> tipDescription = "Good \uD83D\uDE42"
+            in 20..24 -> tipDescription = "Great \uD83D\uDE0A"
+            else -> tipDescription = "Amazing \uD83E\uDD73"
         }
 
         tvTipDescription.text = tipDescription
