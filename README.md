@@ -30,7 +30,10 @@ Here's a walkthrough of implemented user stories:
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+One challenge that I noticed was that there was no constraint on how long the number a user entered into the 
+"Base" or the "Budget" values, so the code had some funky functionality when a user entered something like "1000000000000000000000";
+the zeros would just wrap down to the next line and overlap the text views underneath it. I didn't get a chance to solve this issue,
+but this is something I look forward to exploring for the upcoming assignments!
 
 ## License
 
