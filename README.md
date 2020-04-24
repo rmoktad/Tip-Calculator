@@ -2,7 +2,9 @@
 
 ## Raaisa Moktader
 
-**Tippy** computes the tip and total amount for a bill. The app uses the base amount and tip percentage to calculate the amount owed, and it also describes the quality of service based on the tip.
+**Tippy** computes the tip and total amount for a bill. The app uses the base amount and tip percentage to calculate the amount owed, and it also describes the quality of service based on the tip. The app also allows the user to specify a budget that the user would like
+to stay under for the new amount (tip and total combined), alerting the user through a color change of the total to indicate when the
+budget has been exceeded.
 
 Time spent: **2** hours spent in total
 
